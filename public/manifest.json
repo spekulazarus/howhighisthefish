@@ -1,0 +1,19 @@
+{
+  "name": "Willi Water Level",
+  "short_name": "Willi",
+  "description": "Offline-capable water level monitor using Web Bluetooth.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
