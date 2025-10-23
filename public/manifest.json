@@ -1,6 +1,6 @@
 {
-  "name": "Willi Water Level",
-  "short_name": "Willi",
+  "name": "howhighisthefish",
+  "short_name": "howhighisthefish",
   "description": "Offline-capable water level monitor using Web Bluetooth.",
   "start_url": "/",
   "scope": "/",

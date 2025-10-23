@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import bluetooth from "@/lib/bluetooth";
 import type { Reading, ReadingListener } from "@/lib/types";
+import { getPlatformInfo } from "@/lib/platform";
 
 type Props = {
   onConnected?: (deviceName?: string) => void;
@@ -14,9 +15,15 @@ export default function BluetoothConnectButton({ onConnected, onReading }: Props
   const [connecting, setConnecting] = useState<boolean>(false);
   const [connectedName, setConnectedName] = useState<string | undefined>();
   const [error, setError] = useState<string | null>(null);
+  const [platform, setPlatform] = useState(getPlatformInfo());
+  const { iosSafari } = platform;
 
   useEffect(() => {
     setSupported(bluetooth.isSupported());
+  }, []);
+
+  useEffect(() => {
+    setPlatform(getPlatformInfo());
   }, []);
 
   // Hook listener to forward readings to parent
@@ -52,9 +59,42 @@ export default function BluetoothConnectButton({ onConnected, onReading }: Props
   return (
     <div className="flex flex-col gap-2">
       {!supported && (
-        <p className="text-sm text-red-500">
-          Web Bluetooth wird von diesem Browser nicht unterstützt.
-        </p>
+        iosSafari ? (
+          <div className="text-sm text-amber-500">
+            iPhone Safari unterstützt Web Bluetooth nicht.
+            <div className="mt-1">
+              Optionen:
+              <ul className="list-disc pl-4 mt-1">
+                <li>
+                  Verwende einen kompatiblen Browser wie{" "}
+                  <a
+                    className="underline"
+                    href="https://apps.apple.com/us/app/bluefy-web-ble-browser/id1500727283"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Bluefy
+                  </a>{" "}
+                  oder{" "}
+                  <a
+                    className="underline"
+                    href="https://apps.apple.com/us/app/webble/id1193531073"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WebBLE
+                  </a>
+                  , und rufe diese Seite dort auf.
+                </li>
+                <li>Oder starte die Demo unten, um die UI auszuprobieren.</li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <p className="text-sm text-red-500">
+            Web Bluetooth wird von diesem Browser nicht unterstützt.
+          </p>
+        )
       )}
       {supported && !connectedName && (
         <button

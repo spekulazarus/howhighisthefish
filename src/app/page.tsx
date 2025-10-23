@@ -60,7 +60,7 @@ export default function Home() {
       <main className="flex min-h-screen w-full max-w-4xl flex-col items-center gap-8 py-12 px-6 bg-white dark:bg-black sm:items-start">
         <header className="w-full flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
-            Willi Wasserstand
+            howhighisthefish
           </h1>
           <div className="text-sm text-zinc-600 dark:text-zinc-400">
             {deviceName ? (
